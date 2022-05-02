@@ -53,7 +53,6 @@ export function BaseOptionChartStyle() {
           },
           '.apexcharts-legend-text': {
             lineHeight: '18px',
-            textTransform: 'capitalize'
           }
         }
       }}
