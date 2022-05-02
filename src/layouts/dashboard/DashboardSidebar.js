@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Link as  useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Drawer } from '@mui/material';
@@ -24,6 +24,8 @@ const RootStyle = styled('div')(({ theme }) => ({
     width: DRAWER_WIDTH,
   },
 }));
+
+
 
 // ----------------------------------------------------------------------
 
@@ -52,8 +54,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
-
-        <img src={Logo} alt="R&T - Solutions" />
+        <img src={Logo} alt="LT - Solutions" />
       </Box>
 
       <NavSection navConfig={navConfig} />
