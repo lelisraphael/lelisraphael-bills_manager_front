@@ -70,7 +70,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function BillsToPay() {
+export default function BillsToReceive() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -137,7 +137,7 @@ export default function BillsToPay() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Contas a Pagar
+            Contas a Receber
           </Typography>
           <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             Novo Lanlamento

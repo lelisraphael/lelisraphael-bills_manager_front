@@ -4,6 +4,7 @@ import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import BillsToPay from './pages/BillsToPay';
+import BillsToReceive from './pages/BillsToReceive';
 import NotFound from './pages/Page404';
 import DashboardApp from './pages/DashboardApp';
 
@@ -16,7 +17,9 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <BillsToPay /> },
+        { path: 'bills-to-pay', element: <BillsToPay /> },
+        { path: 'bills-to-receive', element: <BillsToReceive /> },
+
       ],
     },
     {
