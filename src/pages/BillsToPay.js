@@ -156,7 +156,7 @@ export default function BillsToPay() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, company, avatarUrl, due_date } = row;
+                    const { id, name, role, company, due_date } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
