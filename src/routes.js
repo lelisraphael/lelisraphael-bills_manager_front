@@ -3,8 +3,8 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
-import BillsToPay from './pages/BillsToPay';
-import BillsToReceive from './pages/BillsToReceive';
+import AccountsPayables from './pages/AccountsPayables';
+import AccountsReceivables from './pages/AccountsReceivables';
 import NotFound from './pages/Page404';
 import DashboardApp from './pages/DashboardApp';
 
@@ -17,8 +17,8 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: 'bills-to-pay', element: <BillsToPay /> },
-        { path: 'bills-to-receive', element: <BillsToReceive /> },
+        { path: 'accounts-payables', element: <AccountsPayables /> },
+        { path: 'accounts-receivables', element: <AccountsReceivables /> },
 
       ],
     },

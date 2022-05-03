@@ -13,12 +13,12 @@ const navConfig = [
   },
   {
     title: 'Contas a Pagar',
-    path: '/dashboard/bills-to-pay',
+    path: '/dashboard/accounts-payables',
     icon: getIcon('eva:people-fill'),
   },
   {
     title: 'Contas a Receber',
-    path: '/dashboard/bills-to-receive',
+    path: '/dashboard/accounts-receivables',
     icon: getIcon('eva:shopping-bag-fill'),
   }
 ];
