@@ -34,7 +34,7 @@ export default function AccountsReceivables() {
 
   useEffect(() => {
     getAccounts()
-  }, [])
+  })
 
   const getAccounts = async () => {
     const data = await getAccountsReceivables()
