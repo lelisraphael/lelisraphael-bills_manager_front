@@ -15,7 +15,7 @@ import {
 import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import Iconify from '../../components/Iconify';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user';
+import { UserListHead, UserMoreMenu } from '../../sections/@dashboard/user';
 import useAccountsReceivables from '../../hooks/apiCalls/useAccountsReceivables';
 
 const TABLE_HEAD = [
@@ -28,7 +28,7 @@ const TABLE_HEAD = [
 export default function AccountsReceivables() {
   const [data, setData] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const { getAccountsReceivables, status } = useAccountsReceivables();
+  const { getAccountsReceivables } = useAccountsReceivables();
 
   useEffect(() => {
     getAccounts()
