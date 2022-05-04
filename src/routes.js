@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, Navigate} from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 
 
@@ -26,15 +26,13 @@ export default function Router() {
         { path: 'accounts-receivables/edit/:id', element: <EditReceivables /> },
       ],
     },
-    // {
-    //   path: '/',
-    //   element: <LogoOnlyLayout />,
-    //   children: [
-    //     { path: '/', element: <Navigate to="/dashboard/app" /> },
-    //     { path: '404', element: <NotFound /> },
-    //     { path: '*', element: <Navigate to="/404" /> },
-    //   ],
-    // },
-    // { path: '*', element: <Navigate to="/404" replace /> },
+    {
+      path: '/',
+      children: [
+        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '*', element: <Navigate to="/404" /> },
+      ],
+    },
+    { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
