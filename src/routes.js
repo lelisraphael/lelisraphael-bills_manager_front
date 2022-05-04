@@ -5,6 +5,9 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import AccountsPayables from './pages/AccountsPayables';
 import AccountsReceivables from './pages/AccountsReceivables';
+import CreatePayables from './pages/AccountsPayables/create';
+import CreateReceivables from './pages/AccountsReceivables/create';
+
 import NotFound from './pages/Page404';
 import DashboardApp from './pages/DashboardApp';
 
@@ -18,8 +21,9 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'accounts-payables', element: <AccountsPayables /> },
+        { path: 'accounts-payables/create', element: <CreatePayables /> },
         { path: 'accounts-receivables', element: <AccountsReceivables /> },
-
+        { path: 'accounts-receivables/create', element: <CreateReceivables /> },
       ],
     },
     {

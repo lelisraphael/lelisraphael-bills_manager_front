@@ -54,10 +54,10 @@ export default function AccountsReceivables() {
           </Button>
         </Stack>
         <Card>
-        {isLoading &&
-                  <Box sx={{ width: '100%' }}>
-                    <LinearProgress />
-                  </Box>}
+          {isLoading &&
+            <Box sx={{ width: '100%' }}>
+              <LinearProgress />
+            </Box>}
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -76,7 +76,10 @@ export default function AccountsReceivables() {
                       <TableCell align="left">{item.amount}</TableCell>
                       <TableCell align="left">{item.due_date}</TableCell>
                       <TableCell align="right">
-                        <UserMoreMenu />
+                        <UserMoreMenu
+                          id={item.id}
+                          getAccounts={getAccounts}
+                        />
                       </TableCell>
                     </TableRow>
                   })}
@@ -84,7 +87,6 @@ export default function AccountsReceivables() {
               </Table>
             </TableContainer>
           </Scrollbar>
-
         </Card>
       </Container>
     </Page>

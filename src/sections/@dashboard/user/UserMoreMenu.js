@@ -1,15 +1,19 @@
 import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-// material
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
-// component
 import Iconify from '../../../components/Iconify';
+import useAccountsReceivables from '../../../hooks/apiCalls/useAccountsReceivables';
 
-// ----------------------------------------------------------------------
 
-export default function UserMoreMenu() {
+const UserMoreMenu = (props) => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { delAccountsReceivables } = useAccountsReceivables();
+
+  const deleteAccounts = async () => {
+    await delAccountsReceivables(props.id)
+    props.getAccounts()
+  }
 
   return (
     <>
@@ -27,11 +31,11 @@ export default function UserMoreMenu() {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
+        <MenuItem sx={{ color: 'text.secondary' }} >
           <ListItemIcon>
             <Iconify icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Deletar" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText primary="Deletar" primaryTypographyProps={{ variant: 'body2' }} onClick={() => deleteAccounts()} />
         </MenuItem>
 
         <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
@@ -44,3 +48,5 @@ export default function UserMoreMenu() {
     </>
   );
 }
+
+export default UserMoreMenu

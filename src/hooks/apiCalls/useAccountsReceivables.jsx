@@ -1,17 +1,26 @@
 import axios from 'axios';
-import { useState } from 'react'
 
 const useAccountsReceivables = () => {
-  const [status, setStatus] = useState()
 
   const getAccountsReceivables = async (id = '') => {
-
     const data = await axios.get(`https://letsolutions-bills-manager.herokuapp.com/api/v1/accounts_receivables/${id}`)
-    setStatus(data.status)
     return data
   }
 
-  return { getAccountsReceivables, status }
+  const delAccountsReceivables = async (id) => {
+    axios
+      .delete(`https://letsolutions-bills-manager.herokuapp.com/api/v1/accounts_receivables/${id}`)
+      .then(response => {
+        return response
+      }).catch((error) => console.log(error))
+  }
+
+  const createAccountsReceivables = async (params) => {
+    const data = await axios.post(`https://letsolutions-bills-manager.herokuapp.com/api/v1/accounts_receivables/`, params)
+    return data
+  }
+
+  return { getAccountsReceivables, delAccountsReceivables, createAccountsReceivables }
 }
 
 export default useAccountsReceivables
