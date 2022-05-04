@@ -33,6 +33,7 @@ export default function EditRecevables() {
   useEffect(() => {
     getCategories()
     getAccounts(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const Alert = React.forwardRef(function Alert(props, ref) {

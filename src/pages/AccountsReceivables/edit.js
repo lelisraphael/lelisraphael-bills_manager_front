@@ -28,11 +28,12 @@ export default function EditRecevables() {
   const { id } = useParams();
   const { createAccountsReceivables, getAccountsReceivables } = useAccountsReceivables();
   const { getAccountsCategories } = useAccountsCategories();
-  const [description, setDescription] = useState()
+  const [setDescription] = useState()
 
   useEffect(() => {
     getCategories()
     getAccounts(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -71,7 +72,7 @@ export default function EditRecevables() {
     },
   });
 
-  const { handleSubmit, isSubmitting, getFieldProps, touched } = formik;
+  const { handleSubmit, getFieldProps } = formik;
 
   return (
     account?.data.description !== undefined && <Page title="Contas a Receber" >

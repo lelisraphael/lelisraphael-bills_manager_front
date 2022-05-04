@@ -16,6 +16,7 @@ export default function DashboardApp() {
 
   useEffect(() => {
     getAccounts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getAccounts = async () => {

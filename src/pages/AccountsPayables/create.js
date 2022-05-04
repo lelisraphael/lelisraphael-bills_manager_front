@@ -30,6 +30,7 @@ export default function CreatePayables() {
 
   useEffect(() => {
     getCategories()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -45,7 +46,6 @@ export default function CreatePayables() {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -62,7 +62,7 @@ export default function CreatePayables() {
     },
   });
 
-  const { handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { handleSubmit, getFieldProps } = formik;
 
   return (
     <Page title="Contas a Receber">
