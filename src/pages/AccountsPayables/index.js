@@ -32,7 +32,8 @@ export default function AccountsReceivables() {
 
   useEffect(() => {
     getAccounts()
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const getAccounts = async () => {
     const data = await getAccountsReceivables()

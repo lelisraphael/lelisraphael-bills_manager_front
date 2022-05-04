@@ -14,26 +14,28 @@ import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
-// material
 import { LoadingButton } from '@mui/lab';
-// component
+import useAccountsReceivables from '../../hooks/apiCalls/useAccountsReceivables';
+
 
 export default function CreateRecevables() {
   const navigate = useNavigate();
+  const { createAccountsReceivables } = useAccountsReceivables();
 
   const formik = useFormik({
     initialValues: {
       description: '',
-      category: '',
+      category_id: '',
       amount: '',
       due_date: '',
     },
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (values) => {
+      navigate('/dashboard/accounts-recivables', { replace: true });
+      createAccountsReceivables(values)
     },
   });
 
-  const { handleSubmit, isSubmitting } = formik;
+  const { handleSubmit, isSubmitting, getFieldProps } = formik;
 
   return (
     <Page title="Contas a Receber">
@@ -51,20 +53,23 @@ export default function CreateRecevables() {
           <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
               <Stack spacing={3} m={5} >
-
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                   <TextField
+                    name="description"
                     fullWidth
                     label="Descrição"
+                    value={1}
+                    {...getFieldProps('description')}
                   />
                   <Select
                     fullWidth
                     id="demo-simple-select"
                     value={1}
+                    {...getFieldProps('category_id')}
                   >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value={1}>Ten</MenuItem>
+                    <MenuItem value={2}>Twenty</MenuItem>
+                    <MenuItem value={3}>Thirty</MenuItem>
                   </Select>
                 </Stack>
 
@@ -73,10 +78,15 @@ export default function CreateRecevables() {
                     fullWidth
                     type="number"
                     label="Valor"
+                    name="amount"
+                    {...getFieldProps('amount')}
+
                   />
                   <TextField
                     type="date"
                     fullWidth
+                    name="due_date"
+                    {...getFieldProps('due_date')}
                   />
                 </Stack>
 
@@ -88,7 +98,6 @@ export default function CreateRecevables() {
                     Salvar
                   </LoadingButton>
                 </Stack>
-
 
               </Stack>
             </Form>
