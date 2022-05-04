@@ -8,15 +8,7 @@ const useAccountsReceivables = () => {
   }
 
   const delAccountsReceivables = async (id) => {
-  
-    const headers = {"Access-Control-Allow-Origin": "*"}
-
-    axios
-      .delete(`https://letsolutions-bills-manager.herokuapp.com/api/v1/accounts_receivables/${id}`, headers
-)
-      .then(response => {
-        return response
-      }).catch((error) => console.log(error))
+    await axios.delete(`https://letsolutions-bills-manager.herokuapp.com/api/v1/accounts_receivables/${id}`)
   }
 
   const createAccountsReceivables = async (params) => {

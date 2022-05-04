@@ -1,21 +1,58 @@
-// @mui
+import { useState, useEffect } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
-// components
 import Page from '../components/Page';
-// sections
 import {
   AppCurrentVisits,
-  AppWebsiteVisits,
   AppWidgetSummary,
 } from '../sections/@dashboard/app';
 
-// ----------------------------------------------------------------------
+import useAccountsDashboard from '../hooks/apiCalls/useAccountsDashboard'
 
 export default function DashboardApp() {
   const theme = useTheme();
+  const { getAccountsDashboard } = useAccountsDashboard()
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    getAccounts()
+  }, [])
+
+  const getAccounts = async () => {
+    const accountsData = await getAccountsDashboard()
+    setData(accountsData)
+  }
+
+  const byCategoryReceivable = () => {
+    const obj = data?.total_accounts_receivable?.by_category
+    const receivables = []
+    Object.keys(obj).forEach((item) => {
+      receivables.push(
+        {
+          label: item,
+          value: parseInt(obj[item], 10)
+        }
+      )
+    });
+    return receivables
+  }
+
+  const byCategoryPayable = () => {
+    const obj = data?.total_accounts_payable?.by_category
+    const receivables = []
+    Object?.keys(obj).forEach((item) => {
+      receivables.push(
+        {
+          label: item,
+          value: parseInt(obj[item], 10)
+        }
+      )
+    });
+    return receivables
+  }
 
   return (
+    data !== undefined &&
     <Page title="Dashboard">
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
@@ -24,66 +61,39 @@ export default function DashboardApp() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6}>
-            <AppWidgetSummary title="xx" total={714000} icon={''} />
+            <AppWidgetSummary title="Total de Contas a Pagar" total={data?.total_accounts_payable.general || 0} color="error" />
           </Grid>
 
           <Grid item xs={12} sm={6} md={6}>
-            <AppWidgetSummary title="xx" total={314000} color="info" icon={''} />
+            <AppWidgetSummary title="Total de Contas a Receber" total={data?.total_accounts_receivable.general || 0} color="success" />
           </Grid>
 
-
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppWebsiteVisits
-              title="A Pagar X A receber"
-              subheader="(+43%) than last year"
-              chartLabels={[
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
-              ]}
-              chartData={[
-                {
-                  name: 'Contas a Pagar',
-                  type: 'line',
-                  fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-                },
-                {
-                  name: 'Contas a Receber',
-                  type: 'area',
-                  fill: 'gradient',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-                },
-              ]}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={6}>
             <AppCurrentVisits
-              title=" xxxx "
-              chartData={[
-                { label: 'xx', value: 4344 },
-                { label: 'xx', value: 5435 },
-              ]}
+              title="Conta a Pagar"
+              chartData={byCategoryPayable()}
               chartColors={[
-                theme.palette.chart.blue[0],
+                theme.palette.chart.red[1],
                 theme.palette.chart.yellow[0],
+                theme.palette.chart.blue[5],
+                theme.palette.chart.yellow[10]
               ]}
             />
           </Grid>
 
-   
+          <Grid item xs={12} md={6} lg={6}>
+            <AppCurrentVisits
+              title="Conta a Receber"
+              chartData={byCategoryReceivable()}
+              chartColors={[
+                theme.palette.chart.blue[5],
+                theme.palette.chart.yellow[0],
+                theme.palette.chart.blue[10],
+              ]}
+            />
+          </Grid>
 
-         
+
         </Grid>
       </Container>
     </Page>

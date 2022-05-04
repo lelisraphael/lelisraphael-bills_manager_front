@@ -50,13 +50,12 @@ export default function AccountsReceivables() {
           <Typography variant="h4" gutterBottom>
             Contas a Receber
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to="../accounts-receivables/create" startIcon={<Iconify icon="eva:plus-fill" />}>
             Novo Lançamento
           </Button>
         </Stack>
         <Card>
-          {isLoading &&
-            <Box sx={{ width: '100%' }}>
+          {isLoading &&            <Box sx={{ width: '100%' }}>
               <LinearProgress />
             </Box>}
           <Scrollbar>

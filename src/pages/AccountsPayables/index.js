@@ -11,12 +11,14 @@ import {
   Container,
   Typography,
   TableContainer,
+  LinearProgress,
+  Box
 } from '@mui/material';
 import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import Iconify from '../../components/Iconify';
-import { UserListHead, UserMoreMenu } from '../../sections/@dashboard/user';
-import useAccountsReceivables from '../../hooks/apiCalls/useAccountsReceivables';
+import { UserListHead, UserMoreMenu } from '../../sections/@dashboard/payables';
+import useAccountsPayables from '../../hooks/apiCalls/useAccountsPayables';
 
 const TABLE_HEAD = [
   { id: 'description', label: 'Descricao', alignRight: false },
@@ -25,10 +27,10 @@ const TABLE_HEAD = [
   { id: 'due_date', label: 'Vencimento', alignRight: false },
 ];
 
-export default function AccountsReceivables() {
+export default function AccountsPayables() {
   const [data, setData] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const { getAccountsReceivables } = useAccountsReceivables();
+  const { getAccountsPayables } = useAccountsPayables();
 
   useEffect(() => {
     getAccounts()
@@ -36,30 +38,32 @@ export default function AccountsReceivables() {
   }, [])
 
   const getAccounts = async () => {
-    const data = await getAccountsReceivables()
+    const data = await getAccountsPayables()
     setIsLoading(false)
     setData(data.data)
   }
 
   return (
-    <Page title="Contas a Receber">
+    <Page title="Contas a Pagar">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Contas a Receber
+            Contas a Pagar
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to="../accounts-payables/create" startIcon={<Iconify icon="eva:plus-fill" />}>
             Novo Lançamento
           </Button>
         </Stack>
         <Card>
+          {isLoading &&            <Box sx={{ width: '100%' }}>
+              <LinearProgress />
+            </Box>}
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
                 <UserListHead
                   headLabel={TABLE_HEAD}
                 />
-                {isLoading && "Carregando"}
                 <TableBody>
                   {data?.map((item) => {
                     return <TableRow
@@ -72,7 +76,10 @@ export default function AccountsReceivables() {
                       <TableCell align="left">{item.amount}</TableCell>
                       <TableCell align="left">{item.due_date}</TableCell>
                       <TableCell align="right">
-                        <UserMoreMenu />
+                        <UserMoreMenu
+                          id={item.id}
+                          getAccounts={getAccounts}
+                        />
                       </TableCell>
                     </TableRow>
                   })}
@@ -80,7 +87,6 @@ export default function AccountsReceivables() {
               </Table>
             </TableContainer>
           </Scrollbar>
-
         </Card>
       </Container>
     </Page>

@@ -1,17 +1,16 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-// layouts
+import { useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
-import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-//
+
+
 import AccountsPayables from './pages/AccountsPayables';
-import AccountsReceivables from './pages/AccountsReceivables';
 import CreatePayables from './pages/AccountsPayables/create';
+
+
+import AccountsReceivables from './pages/AccountsReceivables';
 import CreateReceivables from './pages/AccountsReceivables/create';
+import EditReceivables from './pages/AccountsReceivables/edit';
 
-import NotFound from './pages/Page404';
 import DashboardApp from './pages/DashboardApp';
-
-// ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
@@ -24,17 +23,18 @@ export default function Router() {
         { path: 'accounts-payables/create', element: <CreatePayables /> },
         { path: 'accounts-receivables', element: <AccountsReceivables /> },
         { path: 'accounts-receivables/create', element: <CreateReceivables /> },
+        { path: 'accounts-receivables/edit/:id', element: <EditReceivables /> },
       ],
     },
-    {
-      path: '/',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" /> },
-      ],
-    },
-    { path: '*', element: <Navigate to="/404" replace /> },
+    // {
+    //   path: '/',
+    //   element: <LogoOnlyLayout />,
+    //   children: [
+    //     { path: '/', element: <Navigate to="/dashboard/app" /> },
+    //     { path: '404', element: <NotFound /> },
+    //     { path: '*', element: <Navigate to="/404" /> },
+    //   ],
+    // },
+    // { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
